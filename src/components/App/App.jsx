@@ -40,7 +40,9 @@ export function Gallery() {
           toast.success(`Horray! We found ${total} images.`);
         }
 
-        if (total > 0 && total === images.length) {
+        console.log(images.length);
+        console.log(total);
+        if (total > 0 && page * 12 > total) {
           toast.info(
             "We're sorry, but you've reached the end of search results."
           );
@@ -90,7 +92,7 @@ export function Gallery() {
         <ModalWindow onClose={getImageInfo} imageInfo={imageInfo} />
       )}
 
-      {images.length > 0 && images.length < total && (
+      {images.length > 0 && images.length !== total && (
         <Button handlePageChange={handlePageChange} />
       )}
       <ToastContainer autoClose={3000} newestOnTop theme="dark" />
