@@ -21,7 +21,7 @@ export function Gallery() {
   const [imageInfo, setImageInfo] = useState(null);
 
   useEffect(() => {
-    (async function getImages() {
+    async function getImages() {
       if (!searchedValue) return;
 
       try {
@@ -40,14 +40,6 @@ export function Gallery() {
           toast.success(`Horray! We found ${total} images.`);
         }
 
-        console.log(images.length);
-        console.log(total);
-        if (total > 0 && page * 12 > total) {
-          toast.info(
-            "We're sorry, but you've reached the end of search results."
-          );
-        }
-
         setImages(prevState => [...prevState, ...hits]);
         setTotal(total);
       } catch (error) {
@@ -55,8 +47,18 @@ export function Gallery() {
       } finally {
         setIsLoading(false);
       }
-    })();
+    }
+
+    getImages();
   }, [searchedValue, page]);
+
+  useEffect(() => {
+    if (!images?.length) return;
+
+    if (total > 0 && images?.length === total) {
+      toast.info("We're sorry, but you've reached the end of search results.");
+    }
+  }, [images?.length, total]);
 
   const getSearchedValue = value => {
     setSearchedValue(value);
