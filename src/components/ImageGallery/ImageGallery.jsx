@@ -5,15 +5,18 @@ import { List } from './ImageGallery.styled';
 export function GalleryList({ images, toggleModal }) {
   return (
     <List>
-      {images.map(({ id, tags, webformatURL, largeImageURL }) => (
-        <GalleryItem
-          key={id}
-          src={webformatURL}
-          alt={tags}
-          toggleModal={toggleModal}
-          largeImageURL={largeImageURL}
-        />
-      ))}
+      {images.map(
+        ({ id, tags, webformatURL, largeImageURL, isScrollAnchor }) => (
+          <GalleryItem
+            key={id}
+            src={webformatURL}
+            alt={tags}
+            toggleModal={toggleModal}
+            largeImageURL={largeImageURL}
+            isScrollAnchor={isScrollAnchor}
+          />
+        )
+      )}
     </List>
   );
 }
@@ -24,6 +27,7 @@ GalleryList.propTypes = {
       tags: PropTypes.string.isRequired,
       webformatURL: PropTypes.string.isRequired,
       largeImageURL: PropTypes.string.isRequired,
+      isScrollAnchor: PropTypes.bool.isRequired,
     }).isRequired
   ).isRequired,
   toggleModal: PropTypes.func.isRequired,
