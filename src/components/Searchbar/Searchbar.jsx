@@ -21,7 +21,7 @@ export function SearchBar({ onSubmit }) {
   };
 
   return (
-    <Header id="header">
+    <Header>
       <Form onSubmit={handleSubmit}>
         <Btn>
           <Icon>Search</Icon>

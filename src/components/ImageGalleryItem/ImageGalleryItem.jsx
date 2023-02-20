@@ -13,12 +13,12 @@ export function GalleryItem({
   const elemToScroll = useRef(null);
 
   useEffect(() => {
-    const header = document.querySelector('#header');
-    const heightOffset = header.offsetHeight + 15;
+    // const header = document.querySelector('#header');
+    // const heightOffset = header.offsetHeight + 15;
     // console.log(heightOffset);
 
     if (!isScrollAnchor) return;
-    scrollWithOffset(elemToScroll.current, heightOffset);
+    scrollWithOffset(elemToScroll.current, 87);
   }, [isScrollAnchor]);
 
   return (

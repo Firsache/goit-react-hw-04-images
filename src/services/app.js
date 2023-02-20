@@ -27,18 +27,3 @@ export const fetchImages = async (query, page) => {
   );
   return { hits, total: data.totalHits };
 };
-
-// export const fetchImages = async (query, page) => {
-//   const params = {
-//     q: query,
-//     page,
-//   };
-//   const { data } = await axios.get('/', { params });
-//   const hits = data.hits.map(({ id, tags, webformatURL, largeImageURL }) => ({
-//     id,
-//     tags,
-//     webformatURL,
-//     largeImageURL,
-//   }));
-//   return { hits, total: data.totalHits };
-// };
