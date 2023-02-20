@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Header, Form, Input, Btn, Icon } from './Searchbar.styled';
+import { useEffect } from 'react';
 
-export function SearchBar({ onSubmit }) {
+export function SearchBar({ onSubmit, setHeaderHeight }) {
   const [searchedValue, setSearchedValue] = useState('');
+
+  const headerRef = useRef(null);
+  useEffect(() => {
+    if (!headerRef.current) return;
+
+    const headerHeight = headerRef.current.offsetHeight;
+    setHeaderHeight(headerHeight);
+  }, [setHeaderHeight]);
 
   const handleSearch = evt => {
     setSearchedValue(evt.target.value);
@@ -21,7 +30,7 @@ export function SearchBar({ onSubmit }) {
   };
 
   return (
-    <Header>
+    <Header ref={headerRef}>
       <Form onSubmit={handleSubmit}>
         <Btn>
           <Icon>Search</Icon>
