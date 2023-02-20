@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { GalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { List } from './ImageGallery.styled';
 
-export function GalleryList({ images, toggleModal }) {
+export function GalleryList({ images, toggleModal, heightOffset }) {
   return (
     <List>
       {images.map(
@@ -12,6 +12,7 @@ export function GalleryList({ images, toggleModal }) {
             src={webformatURL}
             alt={tags}
             toggleModal={toggleModal}
+            heightOffset={heightOffset}
             largeImageURL={largeImageURL}
             isScrollAnchor={isScrollAnchor}
           />
