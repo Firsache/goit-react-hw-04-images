@@ -9,17 +9,14 @@ export function GalleryItem({
   toggleModal,
   largeImageURL,
   isScrollAnchor,
+  heightOffset,
 }) {
   const elemToScroll = useRef(null);
 
   useEffect(() => {
-    // const header = document.querySelector('#header');
-    // const heightOffset = header.offsetHeight + 15;
-    // console.log(heightOffset);
-
     if (!isScrollAnchor) return;
-    scrollWithOffset(elemToScroll.current, 87);
-  }, [isScrollAnchor]);
+    scrollWithOffset(elemToScroll.current, heightOffset);
+  }, [heightOffset, isScrollAnchor]);
 
   return (
     <Item ref={elemToScroll}>
