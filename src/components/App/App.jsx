@@ -11,6 +11,7 @@ import {
 } from 'components/index';
 import { fetchImages } from 'services/app';
 import { App } from './App.styled';
+import { useRef } from 'react';
 
 export function Gallery() {
   const [images, setImages] = useState([]);
@@ -19,6 +20,19 @@ export function Gallery() {
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [imageInfo, setImageInfo] = useState(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [gap, setGap] = useState(0);
+
+  const appRef = useRef(null);
+
+  useEffect(() => {
+    if (appRef) {
+      const gap = Number.parseInt(
+        getComputedStyle(appRef.current).getPropertyValue('gap')
+      );
+      setGap(gap);
+    }
+  }, []);
 
   useEffect(() => {
     async function getImages() {
@@ -83,12 +97,19 @@ export function Gallery() {
       behavior: 'smooth',
     });
   };
-
+  const heightOffset = headerHeight + gap;
   return (
-    <App>
-      <SearchBar onSubmit={getSearchedValue} />
+    <App ref={appRef}>
+      <SearchBar
+        onSubmit={getSearchedValue}
+        setHeaderHeight={setHeaderHeight}
+      />
       {isLoading && <Loading />}
-      <GalleryList images={images} toggleModal={getImageInfo} />
+      <GalleryList
+        heightOffset={heightOffset}
+        images={images}
+        toggleModal={getImageInfo}
+      />
 
       {imageInfo && (
         <ModalWindow onClose={getImageInfo} imageInfo={imageInfo} />
